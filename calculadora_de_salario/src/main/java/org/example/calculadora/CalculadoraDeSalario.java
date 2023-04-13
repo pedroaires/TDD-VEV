@@ -8,16 +8,21 @@ import java.util.Optional;
 
 public class CalculadoraDeSalario {
 
-    public Double calculaSalarioLiquido(Funcionario funcionario){
+    public Double calculaSalarioLiquido(Funcionario funcionario) throws Exception {
 
         Optional<Cargo> cargoOptional = Optional.ofNullable(funcionario.getCargo());
         TipoCalculadora tipoCalculadora = getTipoCalculadora(
                 cargoOptional.orElseThrow(() ->
                         new IllegalArgumentException("O cargo do funcionário não pode ser nulo")));
-        return tipoCalculadora.calculaSalarioLiquido(funcionario.getSalarioBase());
+
+        Optional<Double> salarioBaseOptional = Optional.ofNullable(funcionario.getSalarioBase());
+        return tipoCalculadora.calculaSalarioLiquido(
+                salarioBaseOptional.orElseThrow(() ->
+                        new IllegalArgumentException("O salário base do funcionário não pode ser nulo"))
+        );
     }
 
-    public TipoCalculadora getTipoCalculadora(Cargo cargo){
+    public TipoCalculadora getTipoCalculadora(Cargo cargo) throws Exception {
         switch(cargo){
             case DESENVOLVEDOR:
                 return new CalculaDesenvolvedor();
@@ -28,7 +33,7 @@ public class CalculadoraDeSalario {
             case GERENTE:
                 return new CalculaGerente();
         }
-        throw new RuntimeException("Cargo não gerenciado pela calculadora");
+        throw new Exception("Tipo de cargo desconhecido para a calculadora de salario");
     }
 
 }

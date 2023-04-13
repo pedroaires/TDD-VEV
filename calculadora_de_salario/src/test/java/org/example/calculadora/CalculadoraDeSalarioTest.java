@@ -1,6 +1,5 @@
-package org.example;
+package org.example.calculadora;
 
-import org.example.calculadora.CalculadoraDeSalario;
 import org.example.funcionario.Cargo;
 import org.example.funcionario.Funcionario;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,17 +26,20 @@ class CalculadoraDeSalarioTest {
 
 
     @Test
-    void deveRetornarZero(){
+    void deveRetornarZero() throws Exception {
         this.desenvolvedor.setSalarioBase(0.0);
         this.dba.setSalarioBase(0.0);
         this.gerente.setSalarioBase(0.0);
         this.testador.setSalarioBase(0.0);
 
         assertEquals(0.0, sobreTeste.calculaSalarioLiquido(desenvolvedor));
+        assertEquals(0.0, sobreTeste.calculaSalarioLiquido(dba));
+        assertEquals(0.0, sobreTeste.calculaSalarioLiquido(gerente));
+        assertEquals(0.0, sobreTeste.calculaSalarioLiquido(testador));
     }
 
     @Test
-    void deveRetornarCorretoLimiteInferiorDesenvolvedor(){
+    void deveRetornarCorretoLimiteInferiorDesenvolvedor() throws Exception {
         Double limiteInferior = 2999.99;
         this.desenvolvedor.setSalarioBase(limiteInferior);
 
@@ -48,7 +50,7 @@ class CalculadoraDeSalarioTest {
     }
 
     @Test
-    void deveRetornarCorretoLimiteInferiorDba(){
+    void deveRetornarCorretoLimiteInferiorDba() throws Exception {
         Double limiteInferior = 1999.99;
         this.dba.setSalarioBase(limiteInferior);
 
@@ -59,7 +61,7 @@ class CalculadoraDeSalarioTest {
     }
 
     @Test
-    void deveRetornarCorretoLimiteInferiorGerente(){
+    void deveRetornarCorretoLimiteInferiorGerente() throws Exception{
         Double limiteInferior = 4999.99;
         this.gerente.setSalarioBase(limiteInferior);
 
@@ -70,7 +72,7 @@ class CalculadoraDeSalarioTest {
     }
 
     @Test
-    void deveRetornarCorretoLimiteInferiorTestador(){
+    void deveRetornarCorretoLimiteInferiorTestador() throws Exception{
         Double limiteInferior = 1999.99;
         this.testador.setSalarioBase(limiteInferior);
 
@@ -81,7 +83,7 @@ class CalculadoraDeSalarioTest {
     }
 
     @Test
-    void deveRetornarCorretoLimiteSuperiorDesenvolvedor(){
+    void deveRetornarCorretoLimiteSuperiorDesenvolvedor() throws Exception{
         Double limiteSuperior = 3000.0;
         this.desenvolvedor.setSalarioBase(limiteSuperior);
 
@@ -92,7 +94,7 @@ class CalculadoraDeSalarioTest {
     }
 
     @Test
-    void deveRetornarCorretoLimiteSuperiorDba(){
+    void deveRetornarCorretoLimiteSuperiorDba() throws Exception{
         Double limiteSuperior = 2000.0;
         this.dba.setSalarioBase(limiteSuperior);
 
@@ -103,7 +105,7 @@ class CalculadoraDeSalarioTest {
     }
 
     @Test
-    void deveRetornarCorretoLimiteSuperiorGerente(){
+    void deveRetornarCorretoLimiteSuperiorGerente() throws Exception{
         Double limiteSuperior = 5000.0;
         this.gerente.setSalarioBase(limiteSuperior);
 
@@ -114,7 +116,7 @@ class CalculadoraDeSalarioTest {
     }
 
     @Test
-    void deveRetornarCorretoLimiteSuperiorTestador(){
+    void deveRetornarCorretoLimiteSuperiorTestador() throws Exception{
         Double limiteSuperior = 2000.0;
         this.testador.setSalarioBase(limiteSuperior);
 
@@ -125,16 +127,39 @@ class CalculadoraDeSalarioTest {
     }
 
     @Test
-    void deveLancarExcecaoCargoNulo(){
+    void deveLancarExcecaoCargoNulo() throws Exception{
         this.desenvolvedor.setCargo(null);
         this.dba.setCargo(null);
         this.testador.setCargo(null);
         this.gerente.setCargo(null);
 
-        assertThrows(IllegalArgumentException.class, () -> sobreTeste.calculaSalarioLiquido(desenvolvedor));
-        assertThrows(IllegalArgumentException.class, () -> sobreTeste.calculaSalarioLiquido(dba));
-        assertThrows(IllegalArgumentException.class, () -> sobreTeste.calculaSalarioLiquido(gerente));
-        assertThrows(IllegalArgumentException.class, () -> sobreTeste.calculaSalarioLiquido(testador));
+        String expectedExceptionMessage = "O cargo do funcionário não pode ser nulo";
+        assertThrows(IllegalArgumentException.class, () -> sobreTeste.calculaSalarioLiquido(desenvolvedor))
+                .getMessage().equals(expectedExceptionMessage);
+        assertThrows(IllegalArgumentException.class, () -> sobreTeste.calculaSalarioLiquido(dba))
+                .getMessage().equals(expectedExceptionMessage);
+        assertThrows(IllegalArgumentException.class, () -> sobreTeste.calculaSalarioLiquido(gerente))
+                .getMessage().equals(expectedExceptionMessage);
+        assertThrows(IllegalArgumentException.class, () -> sobreTeste.calculaSalarioLiquido(testador))
+                .getMessage().equals(expectedExceptionMessage);
+    }
+
+    @Test
+    void deveLancarExcecaoSalarioNulo() throws Exception{
+        this.desenvolvedor.setSalarioBase(null);
+        this.dba.setSalarioBase(null);
+        this.testador.setSalarioBase(null);
+        this.gerente.setSalarioBase(null);
+
+        String expectedExceptionMessage = "O salário base do funcionário não pode ser nulo";
+        assertThrows(IllegalArgumentException.class, () -> sobreTeste.calculaSalarioLiquido(desenvolvedor))
+                .getMessage().equals(expectedExceptionMessage);
+        assertThrows(IllegalArgumentException.class, () -> sobreTeste.calculaSalarioLiquido(dba))
+                .getMessage().equals(expectedExceptionMessage);
+        assertThrows(IllegalArgumentException.class, () -> sobreTeste.calculaSalarioLiquido(gerente))
+                .getMessage().equals(expectedExceptionMessage);
+        assertThrows(IllegalArgumentException.class, () -> sobreTeste.calculaSalarioLiquido(testador))
+                .getMessage().equals(expectedExceptionMessage);
     }
 
 }
