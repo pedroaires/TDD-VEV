@@ -1,6 +1,12 @@
 package org.example;
 
+
+
 public class CalculadoraDeSalario {
+
+    private final Double LIMITE_DESENVOLVEDOR = 3000.0;
+    private final Double LIMITE_DBA_E_TESTADOR = 2000.0;
+    private final Double LIMITE_GERENTE = 5000.0;
 
 
     public Double calculaSalarioLiquido(Funcionario funcionario){
@@ -8,19 +14,20 @@ public class CalculadoraDeSalario {
 
         switch (funcionario.getCargo()){
             case DESENVOLVEDOR:
-                desconto = 0.1;
+                desconto = funcionario.getSalarioBase() >= LIMITE_DESENVOLVEDOR ? 0.2 : 0.1;
                 break;
             case DBA:
-                desconto = 0.15;
+                desconto = funcionario.getSalarioBase() >= LIMITE_DBA_E_TESTADOR ? 0.25 : 0.15;
                 break;
             case TESTADOR:
-                desconto = 0.15;
+                desconto = funcionario.getSalarioBase() >= LIMITE_DBA_E_TESTADOR ? 0.25 : 0.15;
                 break;
             case GERENTE:
-                desconto = 0.2;
+                desconto = funcionario.getSalarioBase() >= LIMITE_GERENTE ? 0.3 : 0.2;
                 break;
         }
 
         return funcionario.getSalarioBase() * (1.0 - desconto);
     }
+
 }
