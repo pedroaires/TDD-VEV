@@ -16,10 +16,10 @@ class CalculadoraDeSalarioTest {
     void setUp() {
         this.sobreTeste = new CalculadoraDeSalario();
 
-        this.desenvolvedor = new Funcionario("Deyde", "deyde.costa", 3000.0, Cargo.DESENVOLVEDOR);
-        this.dba = new Funcionario("Deyde", "deyde.costa", 3000.0, Cargo.DBA);
-        this.gerente = new Funcionario("Deyde", "deyde.costa", 3000.0, Cargo.GERENTE);
-        this.testador = new Funcionario("Deyde", "deyde.costa", 3000.0, Cargo.TESTADOR);
+        this.desenvolvedor = new Funcionario("joao", "joao.pe.de.feijao", 3000.0, Cargo.DESENVOLVEDOR);
+        this.dba = new Funcionario("renato", "renato.ingrato", 3000.0, Cargo.DBA);
+        this.gerente = new Funcionario("marco", "marco.polo", 3000.0, Cargo.GERENTE);
+        this.testador = new Funcionario("hello", "hello.kitty", 3000.0, Cargo.TESTADOR);
     }
 
 
@@ -31,5 +31,16 @@ class CalculadoraDeSalarioTest {
         this.testador.setSalarioBase(0.0);
 
         assertEquals(0.0, sobreTeste.calculaSalarioLiquido(desenvolvedor));
+    }
+
+    @Test
+    void deveRetornarCorretoLimiteInferiorDesenvolvedor(){
+        Double limiteInferior = 2999.99;
+        this.desenvolvedor.setSalarioBase(limiteInferior);
+
+        Double desconto = 0.2;
+        Double expected = limiteInferior * (1.0 - desconto);
+
+        assertEquals(expected, sobreTeste.calculaSalarioLiquido(desenvolvedor));
     }
 }
