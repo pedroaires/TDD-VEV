@@ -4,15 +4,16 @@ import org.example.calculadora.tiposCalculadoras.*;
 import org.example.funcionario.Cargo;
 import org.example.funcionario.Funcionario;
 
+import java.util.Optional;
+
 public class CalculadoraDeSalario {
 
-    private final Double LIMITE_DESENVOLVEDOR = 3000.0;
-    private final Double LIMITE_DBA_E_TESTADOR = 2000.0;
-    private final Double LIMITE_GERENTE = 5000.0;
-
-
     public Double calculaSalarioLiquido(Funcionario funcionario){
-        TipoCalculadora tipoCalculadora = getTipoCalculadora(funcionario.getCargo());
+
+        Optional<Cargo> cargoOptional = Optional.ofNullable(funcionario.getCargo());
+        TipoCalculadora tipoCalculadora = getTipoCalculadora(
+                cargoOptional.orElseThrow(() ->
+                        new IllegalArgumentException("O cargo do funcionário não pode ser nulo")));
         return tipoCalculadora.calculaSalarioLiquido(funcionario.getSalarioBase());
     }
 

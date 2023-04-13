@@ -123,4 +123,18 @@ class CalculadoraDeSalarioTest {
 
         assertEquals(expected, sobreTeste.calculaSalarioLiquido(testador));
     }
+
+    @Test
+    void deveLancarExcecaoCargoNulo(){
+        this.desenvolvedor.setCargo(null);
+        this.dba.setCargo(null);
+        this.testador.setCargo(null);
+        this.gerente.setCargo(null);
+
+        assertThrows(IllegalArgumentException.class, () -> sobreTeste.calculaSalarioLiquido(desenvolvedor));
+        assertThrows(IllegalArgumentException.class, () -> sobreTeste.calculaSalarioLiquido(dba));
+        assertThrows(IllegalArgumentException.class, () -> sobreTeste.calculaSalarioLiquido(gerente));
+        assertThrows(IllegalArgumentException.class, () -> sobreTeste.calculaSalarioLiquido(testador));
+    }
+
 }
