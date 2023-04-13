@@ -44,4 +44,36 @@ class CalculadoraDeSalarioTest {
         assertEquals(expected, sobreTeste.calculaSalarioLiquido(desenvolvedor));
     }
 
+    @Test
+    void deveRetornarCorretoLimiteInferiorDba(){
+        Double limiteInferior = 1999.99;
+        this.dba.setSalarioBase(limiteInferior);
+
+        Double desconto = 0.15;
+        Double expected = limiteInferior * (1.0 - desconto);
+
+        assertEquals(expected, sobreTeste.calculaSalarioLiquido(dba));
+    }
+
+    @Test
+    void deveRetornarCorretoLimiteInferiorGerente(){
+        Double limiteInferior = 4999.99;
+        this.gerente.setSalarioBase(limiteInferior);
+
+        Double desconto = 0.2;
+        Double expected = limiteInferior * (1.0 - desconto);
+
+        assertEquals(expected, sobreTeste.calculaSalarioLiquido(gerente));
+    }
+
+    @Test
+    void deveRetornarCorretoLimiteInferiorTestador(){
+        Double limiteInferior = 1999.99;
+        this.testador.setSalarioBase(limiteInferior);
+
+        Double desconto = 0.15;
+        Double expected = limiteInferior * (1.0 - desconto);
+
+        assertEquals(expected, sobreTeste.calculaSalarioLiquido(testador));
+    }
 }
