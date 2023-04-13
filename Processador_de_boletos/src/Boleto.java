@@ -3,7 +3,7 @@ package Processador_de_boletos.src;
 
 public class Boleto {
 
-    private Integer codigo;
+    private int codigo;
     private String data;
     private Float valorPago;
 
@@ -12,13 +12,13 @@ public class Boleto {
         this.valorPago = 0F;
     }
     
-    public Boleto(Integer codigo, String data, Float valorPago) {
+    public Boleto(int codigo, String data, Float valorPago) {
         this.codigo = codigo;
         this.data = data;
         this.valorPago = valorPago;
     }
 
-    public Integer getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
