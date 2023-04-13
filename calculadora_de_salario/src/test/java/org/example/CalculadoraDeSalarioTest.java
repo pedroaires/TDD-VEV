@@ -38,9 +38,10 @@ class CalculadoraDeSalarioTest {
         Double limiteInferior = 2999.99;
         this.desenvolvedor.setSalarioBase(limiteInferior);
 
-        Double desconto = 0.2;
+        Double desconto = 0.1;
         Double expected = limiteInferior * (1.0 - desconto);
 
         assertEquals(expected, sobreTeste.calculaSalarioLiquido(desenvolvedor));
     }
+
 }
