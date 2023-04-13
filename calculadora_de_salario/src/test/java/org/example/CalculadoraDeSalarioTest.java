@@ -1,5 +1,8 @@
 package org.example;
 
+import org.example.calculadora.CalculadoraDeSalario;
+import org.example.funcionario.Cargo;
+import org.example.funcionario.Funcionario;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
