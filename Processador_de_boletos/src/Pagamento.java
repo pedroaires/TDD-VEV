@@ -27,7 +27,7 @@ public class Pagamento {
         return data;
     }
 
-    public String getTipoPagamento() {
+    public String getTipo() {
         return tipoPagamento;
     }
 

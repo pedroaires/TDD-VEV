@@ -45,12 +45,16 @@ public class Fatura {
     }
 
     public boolean isPago(){
+        return this.valorTotal <= getValorTotalPagamentos();
+    }
+
+    public float getValorTotalPagamentos(){
         float valorPagado = 0;
-        for(int i=0; i<=this.pagamentos.size();i++){
+        for(int i=0; i < this.pagamentos.size();i++){
             valorPagado += pagamentos.get(i).getValorPago();
         }
 
-        return this.valorTotal <= valorPagado;
+        return valorPagado; 
     }
 
     
