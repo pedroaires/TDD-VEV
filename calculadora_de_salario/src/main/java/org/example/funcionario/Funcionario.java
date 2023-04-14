@@ -1,4 +1,4 @@
-package org.example;
+package org.example.funcionario;
 
 public class Funcionario {
     private String nome;
