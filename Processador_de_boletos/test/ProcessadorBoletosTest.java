@@ -1,16 +1,15 @@
 package Processador_de_boletos.test;
 
-import org.junit.Test;
-
 import Processador_de_boletos.src.Boleto;
 import Processador_de_boletos.src.Fatura;
 import Processador_de_boletos.src.Pagamento;
 import Processador_de_boletos.src.ProcessadorBoletos;
-
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class ProcessadorBoletosTest{
 
